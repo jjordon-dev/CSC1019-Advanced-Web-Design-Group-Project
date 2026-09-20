@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Match Feature</title>
+
+<style>
+  body{ /* background */
+    background-image: url(unnamed.jpg); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    font-family:"Press Start 2P", monospace;
+    margin: 0;
+  }
+
+  .page{
+    display:flex;
+    justify-content:center;
+    margin:40px 0;
+  }
+
+
+  .match-wrapper{
+    background: rgba(255,248,250,0.88);
+    backdrop-filter: blur(4px); 
+    border:2px dotted #ffb5d5;
+    border-radius:12px;
+    padding:20px;
+    width:700px;
+    box-shadow:0 0 50px rgba(255,0,200,0.25);
+    text-align:center;
+  }
+
+  h2{
+    font-size:16px;
+    color:#d63d9c;
+    margin-bottom:20px;
+  }
+
+
+  .match-box{
+    margin:14px 0;
+    padding:14px;
+    background:#fff0f9;
+    border-radius:8px;
+    border:1.5px solid #ffb5d5;
+    cursor:pointer;
+    transition:0.25s;
+  }
+
+  .match-box:hover{
+    transform:translateY(-2px);
+    background:#ffedf9;
+  }
+
+  .box-content{
+    display:none;
+    margin-top:12px;
+  }
+
+  /* Blog images */
+  .blog-image{
+    width:100%;
+    border-radius:8px;
+    margin-top:10px;
+    border:1.5px solid #ffb5d5;
+  }
+
+  .caption{
+    font-size:10px;
+    color:#d63d9c;
+    margin-top:6px;
+  }
+
+  p{
+    font-size:11px;
+    margin-top:10px;
+  }
+	
+	#home {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.4);
+}	
+	
+</style>
+	<a href="home.html" id="home">Home</a>
+
+</head>
+
+<body>
+
+<div class="page">
+  <div class="match-wrapper">
+    <h2>🏐 Division 3 League final
+        Munterconnaught V Denn
+    </h2>
+
+    <!-- Buildup -->
+    <div class="match-box" onclick="toggleContent('buildup')">
+      <strong>Buildup</strong>
+      <div id="buildup" class="box-content">
+        <div class="caption">Pre-match atmosphere</div>
+        <p>As a supporter of Munterconnaught I was looking forward to this game as I knew it would encapsulate the exceptional year our mens senior team had already had as they already won the junior championship in October.
+            It was a foggy cold wet evening however supporters of both teams came in dozens to watch this anticipated specticle. The teams had only met once before in the league with Munterconnaught being victorius, however it is key to note that this was Denns only loss so far in the league.
+            Both teams looked up for this battle during the warmups with large panels for both sides.
+            
+        </p>
+      </div>
+    </div>
+
+    <!-- First Half -->
+    <div class="match-box" onclick="toggleContent('firsthalf')">
+      <strong>First Half</strong>
+      <div id="firsthalf" class="box-content">
+        <div class="caption">First half action</div>
+        <p>Munterconnaught started strong with Denn looking overwhelmed and unfit however this was not the story for the whole half. Junior player of the year
+            Ryan Nwaneri and Junior final man of the match Cejay Reilly were both forced off due to injuries leaving a sense of doubt around the pitch. Denns Sean Donoghue and his brother Thomas
+            both contributed to the scoreboard leaving it a draw game with 5 minutes left. Eoin O'Shea produced a terrific 2 pointer which was followed by 2 close range frees from
+            his brother Enda gave Munterconnaught the lead going into the break.
+        </p>
+      </div>
+    </div>
+
+    <!-- Second Half -->
+    <div class="match-box" onclick="toggleContent('secondhalf')">
+      <strong>Second Half</strong>
+      <div id="secondhalf" class="box-content">
+        <div class="caption">Second half action</div>
+        <p>The second half painted a different picture as Munterconnaughts fitness allowed them to dicate the game. £ early scored from Daniel Yore, Conor Hetherton and Sean Hendrick
+            gave them a 7 point lead with 20 minutes to go. Denn managed to defended the scoring zone well as 10 scoreless minutes for both sides followed. With 10 minutes to go the teams scored 2 points each ,
+            trading scores for the next 5 minutes. Denn missed 2 key goal chances one hitting the crossbar and the other being stopped by Munterconnaughts keeper Charles Bough however the managed to score 2 well worked points.
+            This was not enough as they csame up short with the final score being 1-15 to 0-13 in favour of Munterconnaught.
+        </p>
+      </div>
+    </div>
+
+    <!-- Top Performers -->
+    <div class="match-box" onclick="toggleContent('performers')">
+      <strong>Top Performers</strong>
+      <div id="performers" class="box-content">
+        <div class="caption">Standout players</div>
+        <h5>Eoin O'Shea</h5>
+        <p>Starting on the bench due to illness Eoin came on early and persevered providing crucial scores and turnovers for his side</p>
+        <h5>Sean Hendrick</h5>
+        <p>The wing back was a great asset for his side offensively as he dictated the play and tallyed up scores using his wide scoring range</p>
+        <h5>Thomas Donoghue</h5>
+        <p>Despite being on the losing side, Thomas was key to his teams attack today as every ball went through him.
+            His quick feet and ability to score off both sides made him crucial to Denns efforts.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function toggleContent(id){
+    var x = document.getElementById(id);
+    if (x.style.display === "block") {
+      x.style.display = "none";
+    } else {
+      x.style.display = "block";
+    }
+  }
+</script>
+
+</body>
+</html>

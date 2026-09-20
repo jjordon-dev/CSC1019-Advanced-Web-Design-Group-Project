@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bloggers' history</title>
+    <style>
+      body {
+        font-family: "Courier New", monospace;
+        background-color: #000000;
+        color: #ffffff;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      a {
+        color: #00aaff;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #ff66cc;
+        text-decoration: underline;
+      }
+
+      .site-header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px 0;
+        border-bottom: 2px dashed #ff66cc;
+      }
+
+      .site-title {
+        font-size: 2em;
+        color: #ff66cc;
+        margin-bottom: 5px;
+        text-transform: lowercase;
+      }
+
+      .site-subtitle {
+        color: #00aaff;
+        font-style: italic;
+        font-size: 0.9em;
+      }
+
+      .nav-buttons {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 20px 0 30px;
+      }
+
+      .nav-btn {
+        background-color: #222222;
+        color: #ffffff;
+        border: 1px solid #ff66cc;
+        padding: 6px 12px;
+        text-decoration: none;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+      }
+
+      .nav-btn:hover {
+        background-color: #ff66cc;
+        color: #000000;
+      }
+
+      .parrot-notice {
+        text-align: center;
+        background-color: #1a1a1a;
+        border: 2px solid #ff66cc;
+        padding: 10px;
+        margin: 20px 0;
+        border-radius: 5px;
+      }
+
+      .parrot-notice h3 {
+        color: #ff66cc;
+        margin: 5px 0;
+        font-size: 1em;
+      }
+
+      .post-form {
+        background-color: #111111;
+        border: 1px solid #333333;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+
+      .form-title {
+        color: #ff66cc;
+        margin-top: 0;
+        font-size: 1.2em;
+        border-bottom: 1px solid #333333;
+        padding-bottom: 5px;
+      }
+
+      .form-row {
+        margin-bottom: 10px;
+      }
+
+      label {
+        color: #00aaff;
+        font-size: 12px;
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      input,
+      textarea,
+      select {
+        width: 100%;
+        padding: 8px;
+        background-color: #222222;
+        color: #ffffff;
+        border: 1px solid #333333;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+      }
+
+      textarea {
+        min-height: 80px;
+        resize: vertical;
+      }
+
+      .submit-btn {
+        background-color: #ff66cc;
+        color: #000000;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: "Courier New", monospace;
+        font-weight: bold;
+        font-size: 12px;
+      }
+
+      .submit-btn:hover {
+        background-color: #ff33aa;
+      }
+
+      .posts-container {
+        margin-top: 30px;
+      }
+
+      .posts-title {
+        color: #ff66cc;
+        font-size: 1.3em;
+        border-bottom: 1px solid #333333;
+        padding-bottom: 5px;
+        margin-bottom: 20px;
+      }
+
+      .user-post {
+        background-color: #111111;
+        border: 1px solid #333333;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+      }
+
+      .post-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+        padding-bottom: 8px;
+        border-bottom: 1px dashed #333333;
+      }
+
+      .user-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .user-avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background-color: #ff66cc;
+        color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 14px;
+        flex-shrink: 0;
+      }
+
+      .user-name {
+        color: #00aaff;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      .post-date {
+        color: #888888;
+        font-size: 11px;
+      }
+
+      .post-category {
+        display: inline-block;
+        background-color: #222222;
+        color: #ff66cc;
+        padding: 2px 8px;
+        border-radius: 2px;
+        font-size: 10px;
+        border: 1px solid #ff66cc;
+      }
+
+      .post-content {
+        font-size: 13px;
+        color: #cccccc;
+        margin: 10px 0;
+        line-height: 1.5;
+      }
+
+      .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-top: 10px;
+      }
+
+      .post-tag {
+        background-color: #1a1a1a;
+        color: #00aaff;
+        padding: 2px 6px;
+        border-radius: 2px;
+        font-size: 10px;
+        border: 1px solid #333333;
+      }
+
+      .post-actions {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px dashed #333333;
+      }
+
+      .action-btn {
+        background: none;
+        border: none;
+        color: #888888;
+        cursor: pointer;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        gap: 3px;
+      }
+
+      .action-btn:hover {
+        color: #ff66cc;
+      }
+
+      .currently-active {
+        background-color: #111111;
+        border: 1px solid #333333;
+        padding: 15px;
+        margin-top: 30px;
+        border-radius: 5px;
+      }
+
+      .active-title {
+        color: #ff66cc;
+        font-size: 1.1em;
+        margin-top: 0;
+        margin-bottom: 15px;
+      }
+
+      .active-user {
+        display: flex;
+        align-items: center;
+        padding: 8px 0;
+        border-bottom: 1px dashed #333333;
+      }
+
+      .active-user:last-child {
+        border-bottom: none;
+      }
+
+      .active-user-avatar {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: #00aaff;
+        color: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 10px;
+        font-weight: bold;
+        margin-right: 10px;
+        flex-shrink: 0;
+      }
+
+      .active-user-name {
+        color: #ffffff;
+        font-size: 12px;
+      }
+
+      .active-user-activity {
+        color: #888888;
+        font-size: 11px;
+        margin-left: auto;
+      }
+
+      .site-footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 2px dashed #333333;
+        color: #666666;
+        font-size: 11px;
+      }
+
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+
+        .post-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 5px;
+        }
+
+        .nav-buttons {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .nav-btn {
+          width: 90%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <h1 class="site-title">bloggers' history</h1>
+      <p class="site-subtitle">where everyone shares what they're up to</p>
+    </header>
+
+    <div class="nav-buttons">
+      <a href="home.html" class="nav-btn">home</a>
+      <a href="#" class="nav-btn">blog</a>
+      <a href="#" class="nav-btn">post history</a>
+      <a href="#" class="nav-btn">members</a>
+      <a href="#" class="nav-btn">community</a>
+    </div>
+
+    <div class="parrot-notice">
+      <h3>this page is protected by a</h3>
+      <h3>🦜 PARROT</h3>
+      <p style="font-size: 11px; margin: 5px 0">
+        parrots taste with the roofs of their mouths.
+      </p>
+    </div>
+
+    <div class="post-form">
+      <h3 class="form-title">share what you're doing</h3>
+      <div class="form-row">
+        <label for="userName">your name (or alias):</label>
+        <input type="text" id="userName" placeholder="anon or your username" />
+      </div>
+
+      <div class="form-row">
+        <label for="userAvatar">avatar initials (2 letters):</label>
+        <input type="text" id="userAvatar" maxlength="2" placeholder="AA" />
+      </div>
+
+      <div class="form-row">
+        <label for="postCategory">what are you sharing?</label>
+        <select id="postCategory">
+          <option value="watching">🎬 watching</option>
+          <option value="reading">📖 reading</option>
+          <option value="listening">🎧 listening to</option>
+          <option value="playing">🎮 playing</option>
+          <option value="working">💻 working on</option>
+          <option value="creating">🎨 creating</option>
+          <option value="learning">📚 learning</option>
+          <option value="general">💬 general update</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <label for="postContent">what's happening?</label>
+        <textarea
+          id="postContent"
+          placeholder="share what you're currently doing, watching, reading, working on..."
+        ></textarea>
+      </div>
+
+      <div class="form-row">
+        <label for="postTags">tags (comma separated):</label>
+        <input
+          type="text"
+          id="postTags"
+          placeholder="anime, coding, music, etc"
+        />
+      </div>
+
+      <button class="submit-btn" onclick="createPost()">share update</button>
+    </div>
+
+    <div class="currently-active">
+      <h3 class="active-title">currently active bloggers</h3>
+      <div class="active-user">
+        <div class="active-user-avatar">IM</div>
+        <span class="active-user-name">im marry</span>
+        <span class="active-user-activity">watching yu yu hakusho</span>
+      </div>
+      <div class="active-user">
+        <div class="active-user-avatar" style="background-color: #ff66cc">
+          AJ
+        </div>
+        <span class="active-user-name">alex j</span>
+        <span class="active-user-activity">coding new feature</span>
+      </div>
+      <div class="active-user">
+        <div class="active-user-avatar" style="background-color: #00aa00">
+          MR
+        </div>
+        <span class="active-user-name">maya r</span>
+        <span class="active-user-activity">reading malcolm x</span>
+      </div>
+      <div class="active-user">
+        <div class="active-user-avatar" style="background-color: #aa00ff">
+          KC
+        </div>
+        <span class="active-user-name">kaito c</span>
+        <span class="active-user-activity">playing minecraft</span>
+      </div>
+    </div>
+
+    <div class="posts-container">
+      <h2 class="posts-title">recent updates from everyone</h2>
+
+      <div id="postsList"></div>
+    </div>
+
+    <footer class="site-footer">
+      <p>
+        bloggers' history hub | everyone can share | protected by parrots 🦜
+      </p>
+      <p>
+        last updated: <span id="currentDate"></span> |
+        <span id="postCount">0</span> posts shared
+      </p>
+    </footer>
+
+    <script>
+      let posts = [
+        {
+          id: 1,
+          userName: "marry",
+          userAvatar: "IM",
+          avatarColor: "#ff66cc",
+          date: "12-13-25",
+          category: "watching",
+          content:
+            "currently watching yu yu hakusho for the first time and it's so good! i'm on episode 42 and the dark tournament arc is amazing. yusuke's character development is *chef's kiss*",
+          tags: ["anime", "yu yu hakusho", "90s anime", "first watch"],
+        },
+        {
+          id: 2,
+          userName: "alex j",
+          userAvatar: "AJ",
+          avatarColor: "#00aaff",
+          date: "12-12-25",
+          category: "working",
+          content:
+            "working on a new neocities theme with dark mode and pink accents. trying to make it responsive but mobile css is testing my patience 😩",
+          tags: ["coding", "neocities", "webdev", "css"],
+        },
+        {
+          id: 3,
+          userName: "maya r",
+          userAvatar: "MR",
+          avatarColor: "#00aa00",
+          date: "12-11-25",
+          category: "reading",
+          content:
+            "just finished the autobiography of malcolm x and wow. what an incredible read. everyone should read this book at least once in their life.",
+          tags: ["reading", "malcolm x", "books", "biography"],
+        },
+      ];
+
+      let postCount = posts.length;
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const now = new Date();
+        const dateStr = `${now.getMonth() + 1}-${now.getDate()}-${now
+          .getFullYear()
+          .toString()
+          .slice(-2)}`;
+        document.getElementById("currentDate").textContent = dateStr;
+
+        const savedPosts = localStorage.getItem("bloggerHistoryPosts");
+        if (savedPosts) {
+          posts = JSON.parse(savedPosts);
+          postCount = posts.length;
+        }
+
+        const savedCount = localStorage.getItem("bloggerHistoryPostCount");
+        if (savedCount) {
+          postCount = parseInt(savedCount);
+        }
+
+        document.getElementById("postCount").textContent = postCount;
+
+        renderPosts();
+      });
+
+      function createPost() {
+        const userName = document.getElementById("userName").value.trim();
+        const userAvatar = document
+          .getElementById("userAvatar")
+          .value.trim()
+          .toUpperCase();
+        const postCategory = document.getElementById("postCategory").value;
+        const postContent = document.getElementById("postContent").value.trim();
+        const postTags = document.getElementById("postTags").value.trim();
+
+        if (!userName || !postContent) {
+          alert("please fill in at least your name and what you're sharing!");
+          return;
+        }
+
+        const colors = [
+          "#ff66cc",
+          "#00aaff",
+          "#00aa00",
+          "#aa00ff",
+          "#ffaa00",
+          "#aa66ff",
+        ];
+        const colorIndex = userName.length % colors.length;
+        const avatarColor = colors[colorIndex];
+
+        const now = new Date();
+        const dateStr = `${now.getMonth() + 1}-${now.getDate()}-${now
+          .getFullYear()
+          .toString()
+          .slice(-2)}`;
+
+        const newPost = {
+          id: Date.now(),
+          userName: userName || "anon",
+          userAvatar: userAvatar || "??",
+          avatarColor: avatarColor,
+          date: dateStr,
+          category: postCategory,
+          content: postContent,
+          tags: postTags ? postTags.split(",").map((tag) => tag.trim()) : [],
+        };
+
+        posts.unshift(newPost);
+        postCount++;
+
+        localStorage.setItem("bloggerHistoryPosts", JSON.stringify(posts));
+        localStorage.setItem("bloggerHistoryPostCount", postCount.toString());
+
+        document.getElementById("postCount").textContent = postCount;
+        renderPosts();
+
+        document.getElementById("userName").value = "";
+        document.getElementById("userAvatar").value = "";
+        document.getElementById("postContent").value = "";
+        document.getElementById("postTags").value = "";
+
+        alert("your update has been shared!");
+      }
+
+      function renderPosts() {
+        const postsList = document.getElementById("postsList");
+        postsList.innerHTML = "";
+
+        if (posts.length === 0) {
+          postsList.innerHTML =
+            '<p style="text-align: center; color: #888888; font-size: 13px;">no posts yet. be the first to share!</p>';
+          return;
+        }
+
+        const categoryIcons = {
+          watching: "🎬",
+          reading: "📖",
+          listening: "🎧",
+          playing: "🎮",
+          working: "💻",
+          creating: "🎨",
+          learning: "📚",
+          general: "💬",
+        };
+
+        posts.forEach((post) => {
+          const postElement = document.createElement("div");
+          postElement.className = "user-post";
+
+          const tagsHtml = post.tags
+            .map((tag) => `<span class="post-tag">${tag}</span>`)
+            .join("");
+
+          const categoryText =
+            post.category.charAt(0).toUpperCase() + post.category.slice(1);
+          const categoryIcon = categoryIcons[post.category] || "💬";
+
+          postElement.innerHTML = `
+                    <div class="post-header">
+                        <div class="user-info">
+                            <div class="user-avatar" style="background-color: ${
+                              post.avatarColor
+                            }">${post.userAvatar}</div>
+                            <div>
+                                <div class="user-name">${post.userName}</div>
+                                <div class="post-date">${post.date}</div>
+                            </div>
+                        </div>
+                        <div class="post-category">${categoryIcon} ${categoryText}</div>
+                    </div>
+                    
+                    <div class="post-content">
+                        ${post.content.replace(/\n/g, "<br>")}
+                    </div>
+                    
+                    ${
+                      post.tags.length > 0
+                        ? `
+                    <div class="post-tags">
+                        ${tagsHtml}
+                    </div>
+                    `
+                        : ""
+                    }
+                    
+                    <div class="post-actions">
+                        <button class="action-btn" onclick="likePost(${
+                          post.id
+                        })">
+                            <span style="font-size: 12px;">♥</span> like
+                        </button>
+                        <button class="action-btn" onclick="commentOnPost(${
+                          post.id
+                        })">
+                            <span style="font-size: 12px;">💬</span> comment
+                        </button>
+                        <button class="action-btn" onclick="sharePost(${
+                          post.id
+                        })">
+                            <span style="font-size: 12px;">↪</span> share
+                        </button>
+                    </div>
+                `;
+
+          postsList.appendChild(postElement);
+        });
+      }
+
+      function likePost(postId) {
+        alert("liked post! (in a real app, this would save to a database)");
+      }
+
+      function commentOnPost(postId) {
+        const comment = prompt("leave a comment:");
+        if (comment) {
+          alert("comment added!");
+        }
+      }
+
+      function sharePost(postId) {
+        alert("post shared!");
+      }
+
+      document.addEventListener("keydown", function (event) {
+        if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+          createPost();
+        }
+
+        if (event.key === "Escape") {
+          document.getElementById("userName").value = "";
+          document.getElementById("postContent").value = "";
+        }
+      });
+    </script>
+  </body>
+</html>

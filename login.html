@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login / Signup</title>
+  <style>
+    body {
+      font-family: "Press Start 2P", monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 30px;
+      background-image: url(cherryblossom.jpg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 240, 249, 0.6); /* light pink */
+      z-index: 0;
+    }
+
+    .auth-wrapper {
+      position: relative;
+      z-index: 1; 
+      background: #fff8fa;
+      border: 2px dotted #ffb5d5;
+      border-radius: 12px;
+      box-shadow: 0 0 50px rgba(255, 0, 200, 0.2);
+      width: 400px;
+      padding: 20px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    h2 {
+      color: #d63d9c;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .form-input {
+      width: 90%;
+      padding: 8px;
+      margin: 6px 0;
+      border-radius: 6px;
+      border: 1.5px solid #ffb5d5;
+      background: #fff0f9;
+      font-family: monospace;
+    }
+
+    .submit-btn {
+      background: linear-gradient(#ffedf9, #ffdcee);
+      border: 2px solid #ffb5d5;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 14px;
+      color: #d63d9c;
+      cursor: pointer;
+      transition: 0.25s;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: white;
+      transform: translateY(-2px);
+    }
+
+    .dropdown-message {
+      display: none;
+      margin-top: 15px;
+      padding: 10px;
+      background: #fff8fa;
+      border: 2px dotted #ffb5d5;
+      border-radius: 12px;
+      color: #d63d9c;
+      font-size: 14px;
+      box-shadow: 0 0 30px rgba(255, 0, 200, 0.2);
+    }
+
+    .switch-btn {
+      background: none;
+      border: none;
+      color: #d63d9c;
+      cursor: pointer;
+      font-family: "Press Start 2P";
+      margin-top: 10px;
+    }
+    .switch-btn:hover {
+      text-decoration: underline;
+    }
+		
+		#home {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.4);
+}	
+
+  </style>
+</head>
+<body>
+
+<!-- Login Form -->
+<div class="auth-wrapper" id="login-form">
+  <h2>Login 💌</h2>
+  <form onsubmit="showMessage(event, 'login')">
+    <input class="form-input" type="email" placeholder="Your Email" required>
+    <input class="form-input" type="password" placeholder="Password" required>
+    <button class="submit-btn" type="submit">Login ✨</button>
+  </form>
+  <button class="switch-btn" onclick="toggleForms('signup')">Don't have an account? Signup</button>
+  <div class="dropdown-message" id="login-message">Logged in successfully! 🎉</div>
+</div>
+
+<!-- Signup Form -->
+<div class="auth-wrapper" id="signup-form" style="display:none;">
+  <h2>Signup To Receive Our Weekly Newsletter 💌</h2>
+  <form onsubmit="showMessage(event, 'signup')">
+    <input class="form-input" type="text" placeholder="Your Name" required>
+    <input class="form-input" type="email" placeholder="Your Email" required>
+    <input class="form-input" type="password" placeholder="Password" required>
+    <button class="submit-btn" type="submit">Signup ✨</button>
+  </form>
+  <button class="switch-btn" onclick="toggleForms('login')">Already have an account? Login</button>
+  <div class="dropdown-message" id="signup-message">Account created successfully! 🎉</div>
+</div>
+
+<script>
+  function showMessage(event, formType) {
+    event.preventDefault();
+    const message = document.getElementById(`${formType}-message`);
+    message.style.display = 'block';
+    setTimeout(() => {
+      message.style.display = 'none';
+    }, 3000);
+  }
+
+  function toggleForms(formToShow) {
+    document.getElementById('login-form').style.display = formToShow === 'login' ? 'block' : 'none';
+    document.getElementById('signup-form').style.display = formToShow === 'signup' ? 'block' : 'none';
+  }
+</script>
+<a href="home.html" id="home">Home</a>
+
+
+</body>
+</html>

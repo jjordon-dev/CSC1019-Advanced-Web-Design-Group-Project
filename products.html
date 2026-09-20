@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Blog Store</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pink-light: #ffe6f2;
+            --pink-medium: #ff66b2;
+            --pink-dark: #cc3385;
+            --text-dark: #660033;
+        }
+        body {
+            background: linear-gradient(135deg, #fff0f7 0%, #ffe6f2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar-pink {
+            background: linear-gradient(to right, var(--pink-dark), var(--pink-medium));
+            box-shadow: 0 4px 12px rgba(204, 51, 133, 0.2);
+        }
+        .pink-btn {
+            background-color: var(--pink-medium);
+            border: none;
+            color: white;
+            transition: all 0.3s;
+        }
+        .pink-btn:hover {
+            background-color: var(--pink-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(204, 51, 133, 0.3);
+        }
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(255, 102, 178, 0.1);
+            border: 2px solid #ffe6f2;
+            transition: all 0.3s;
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 102, 178, 0.2);
+            border-color: var(--pink-medium);
+        }
+        .product-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #ffe6f2;
+        }
+        .price-tag {
+            color: var(--pink-medium);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .price-tag::before {
+            content: "€";
+            font-size: 0.9em;
+            margin-right: 2px;
+        }
+        .cart-badge {
+            background-color: var(--pink-medium);
+        }
+        .category-badge {
+            background-color: #ffe6f2;
+            color: var(--text-dark);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-pink">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="home.html">
+                <i class="fas fa-blog me-2"></i>Blog Store
+            </a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="products.html">
+                            <i class="fas fa-store me-1"></i>Products
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cart.html">
+                            <i class="fas fa-shopping-cart me-1"></i>Cart
+                            <span class="badge bg-light text-dark rounded-pill ms-1" id="cartCount">0</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="payment.html">
+                            <i class="fas fa-credit-card me-1"></i>Checkout
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container py-5">
+        <h1 class="text-center mb-5" style="color: var(--text-dark);">
+            <i class="fas fa-store me-2"></i>Our Products
+        </h1>
+        
+        <!-- Back to Home button -->
+        <div class="mb-4">
+            <a href="home.html" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Back to Home
+            </a>
+        </div>
+        
+        <div class="row g-4" id="productsList">
+            <!-- Products loaded by JavaScript -->
+        </div>
+        
+        <!-- Go to Cart button -->
+        <div class="text-center mt-5">
+            <a href="cart.html" class="btn pink-btn btn-lg">
+                <i class="fas fa-shopping-cart me-2"></i>View Cart
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Product Data - ONLY 4 PRODUCTS (no mug, no tote bag)
+        const products = [
+            {
+                id: 1, 
+                name: "Blog T-Shirt", 
+                price: 22.99, 
+                category: "clothing", 
+                image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=300&fit=crop&crop=center"
+            },
+            {
+                id: 2, 
+                name: "Blog Hoodie", 
+                price: 44.99, 
+                category: "clothing", 
+                image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=300&fit=crop"
+            },
+            {
+                id: 3, 
+                name: "Blog Stickers", 
+                price: 7.99, 
+                category: "accessories", 
+                image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
+            },
+            {
+                id: 4, 
+                name: "Blog Notebook", 
+                price: 11.99, 
+                category: "accessories", 
+                image: "https://images.unsplash.com/photo-1544716278-e513176f20b5?w=400&h=300&fit=crop"
+            }
+        ];
+
+        // Load cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('blogCart')) || [];
+
+        // Function to load products
+        function loadProducts() {
+            const container = document.getElementById('productsList');
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const inCart = cart.some(item => item.id === product.id);
+                
+                container.innerHTML += `
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product-card h-100">
+                            <img src="${product.image}" class="product-img" alt="${product.name}">
+                            <div class="p-3">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="fw-bold" style="color: var(--text-dark);">${product.name}</h5>
+                                </div>
+                                <div class="mb-3">
+                                    <span class="category-badge">${product.category}</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="price-tag">${product.price.toFixed(2)}</span>
+                                    <button class="btn pink-btn add-to-cart" data-id="${product.id}">
+                                        ${inCart ? 
+                                            '<i class="fas fa-check me-1"></i>In Cart' : 
+                                            '<i class="fas fa-cart-plus me-1"></i>Add to Cart'}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Add event listeners
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    addToCart(id);
+                    this.innerHTML = '<i class="fas fa-check me-1"></i>In Cart';
+                    this.classList.add('disabled');
+                    updateCartCount();
+                    showNotification('Added to cart!');
+                });
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            localStorage.setItem('blogCart', JSON.stringify(cart));
+        }
+
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cartCount').textContent = count;
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'position-fixed bottom-0 end-0 p-3';
+            notification.style.zIndex = '1060';
+            notification.innerHTML = `
+                <div class="toast show">
+                    <div class="toast-header" style="background-color: var(--pink-medium); color: white;">
+                        <strong class="me-auto">Notification</strong>
+                        <button type="button" class="btn-close btn-close-white" onclick="this.parentElement.parentElement.parentElement.remove()"></button>
+                    </div>
+                    <div class="toast-body">${message}</div>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadProducts();
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>

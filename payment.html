@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Blog Store</title>
+    
+    <!-- References -->
+    <!-- Bootstrap 5.3.0 - For responsive layout -->
+    <!-- Font Awesome 6.4.0 - For icons -->
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --pink-light: #ffe6f2;
+            --pink-medium: #ff66b2;
+            --pink-dark: #cc3385;
+            --text-dark: #660033;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #fff0f7 0%, #ffe6f2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .navbar-pink {
+            background: linear-gradient(to right, var(--pink-dark), var(--pink-medium));
+        }
+        
+        .payment-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 102, 178, 0.15);
+            border: 2px solid #ffe6f2;
+        }
+        
+        .payment-card {
+            background: linear-gradient(135deg, #fff5fa 0%, #ffe6f2 100%);
+            border-radius: 15px;
+            border: 2px dashed var(--pink-medium);
+            padding: 20px;
+        }
+        
+        .payment-icon {
+            color: var(--pink-medium);
+            font-size: 2rem;
+        }
+        
+        .form-control {
+            border: 2px solid #ffe6f2;
+            border-radius: 10px;
+            padding: 10px 15px;
+        }
+        
+        .form-control:focus {
+            border-color: var(--pink-medium);
+            box-shadow: 0 0 0 0.25rem rgba(255, 102, 178, 0.25);
+        }
+        
+        .pink-btn {
+            background-color: var(--pink-medium);
+            border: none;
+            color: white;
+            padding: 15px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            width: 100%;
+        }
+        
+        .pink-btn:hover {
+            background-color: var(--pink-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(204, 51, 133, 0.3);
+        }
+        
+        .secure-badge {
+            background-color: #e6fff2;
+            color: #00cc66;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .order-summary {
+            background: #fff9fc;
+            border-radius: 15px;
+            padding: 20px;
+            border: 2px solid #ffe6f2;
+        }
+        
+        .order-item {
+            padding: 8px 0;
+            border-bottom: 1px dashed #ffe6f2;
+        }
+        
+        .total-highlight {
+            color: var(--pink-medium);
+            font-size: 1.2rem;
+        }
+        
+        .euro-amount::before {
+            content: "€";
+            margin-right: 2px;
+        }
+        
+        .currency-notice {
+            background-color: #f0f8ff;
+            border: 1px solid #b3e0ff;
+            border-radius: 10px;
+            padding: 10px 15px;
+            margin-bottom: 20px;
+        }
+        
+        /* Home Button Styles */
+        .home-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+            background-color: var(--pink-medium);
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 5px 15px rgba(204, 51, 133, 0.4);
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .home-btn:hover {
+            background-color: var(--pink-dark);
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(204, 51, 133, 0.6);
+            color: white;
+        }
+        
+        .home-btn-corner {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: var(--pink-medium);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(204, 51, 133, 0.3);
+            transition: all 0.3s;
+        }
+        
+        .home-btn-corner:hover {
+            background-color: var(--pink-dark);
+            transform: translateY(-2px);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-pink navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="home.html">
+                <i class="fas fa-blog me-2"></i>Blog Store
+            </a>
+            <span class="secure-badge">
+                <i class="fas fa-lock me-1"></i>Secure Payment
+            </span>
+        </div>
+    </nav>
+
+    <!-- Currency Notice -->
+    <div class="container mt-4">
+        <div class="currency-notice">
+            <i class="fas fa-euro-sign me-2 text-primary"></i>
+            <strong>All transactions in Euros (€)</strong> - Secure European payment processing
+        </div>
+    </div>
+
+    <!-- Payment Content -->
+    <div class="container py-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="payment-container p-4">
+                    <!-- Home Button in Top Corner -->
+                    <a href="home.html" class="home-btn-corner">
+                        <i class="fas fa-home me-2"></i>Home
+                    </a>
+                    
+                    <h1 class="text-center mb-4" style="color: var(--text-dark);">
+                        <i class="fas fa-credit-card me-2"></i>Payment Details
+                    </h1>
+                    
+                    <div class="row">
+                        <!-- Left Column: Payment Form -->
+                        <div class="col-md-7">
+                            <form id="paymentForm">
+                                <!-- Personal Information -->
+                                <div class="mb-4">
+                                    <h5 class="mb-3" style="color: var(--text-dark);">
+                                        <i class="fas fa-user me-2"></i>Personal Information
+                                    </h5>
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" placeholder="First Name" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" placeholder="Last Name" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="email" class="form-control" placeholder="Email Address" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="tel" class="form-control" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Shipping Address -->
+                                <div class="mb-4">
+                                    <h5 class="mb-3" style="color: var(--text-dark);">
+                                        <i class="fas fa-home me-2"></i>Shipping Address
+                                    </h5>
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <input type="text" class="form-control" placeholder="Street Address" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" placeholder="City" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" placeholder="Postal Code" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" placeholder="State/Province">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <select class="form-control" required>
+                                                <option value="">Select Country</option>
+                                                <option value="DE">Germany</option>
+                                                <option value="FR">France</option>
+                                                <option value="ES">Spain</option>
+                                                <option value="IT">Italy</option>
+                                                <option value="NL">Netherlands</option>
+                                                <option value="BE">Belgium</option>
+                                                <option value="PT">Portugal</option>
+                                                <option value="IE">Ireland</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Payment Method -->
+                                <div class="mb-4">
+                                    <h5 class="mb-3" style="color: var(--text-dark);">
+                                        <i class="fas fa-credit-card me-2"></i>Payment Method
+                                    </h5>
+                                    <div class="payment-card mb-3">
+                                        <div class="d-flex align-items-center mb-3">
+                                            <div class="payment-icon me-3">
+                                                <i class="fab fa-cc-visa"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-1">Credit/Debit Card</h6>
+                                                <small class="text-muted">Pay with your card securely</small>
+                                            </div>
+                                        </div>
+                                        <div class="row g-3">
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" placeholder="Card Number" required maxlength="19">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" placeholder="MM/YY" required maxlength="5">
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" class="form-control" placeholder="CVV" required maxlength="4">
+                                            </div>
+                                            <div class="col-12">
+                                                <input type="text" class="form-control" placeholder="Name on Card" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Terms & Submit -->
+                                <div class="form-check mb-4">
+                                    <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                                    <label class="form-check-label" for="termsCheck">
+                                        I agree to the <a href="#" class="text-decoration-none" style="color: var(--pink-medium);">Terms & Conditions</a>
+                                    </label>
+                                </div>
+                                
+                                <div class="d-grid gap-3">
+                                    <button type="submit" class="btn pink-btn">
+                                        <i class="fas fa-lock me-2"></i>Complete Payment
+                                    </button>
+                                    
+                                    <!-- Navigation Buttons -->
+                                    <div class="d-flex gap-2">
+                                        <a href="cart.html" class="btn btn-outline-secondary flex-grow-1">
+                                            <i class="fas fa-arrow-left me-2"></i>Back to Cart
+                                        </a>
+                                        <a href="products.html" class="btn btn-outline-primary flex-grow-1">
+                                            <i class="fas fa-store me-2"></i>Back to Products
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <!-- Right Column: Order Summary -->
+                        <div class="col-md-5">
+                            <div class="order-summary">
+                                <h5 class="mb-4" style="color: var(--text-dark);">
+                                    <i class="fas fa-receipt me-2"></i>Order Summary
+                                </h5>
+                                
+                                <!-- Order Items -->
+                                <div id="orderItems">
+                                    <!-- Items load here -->
+                                </div>
+                                
+                                <!-- Order Totals -->
+                                <hr>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Subtotal:</span>
+                                    <span class="euro-amount" id="orderSubtotal">0.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Shipping:</span>
+                                    <span class="euro-amount" id="orderShipping">5.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>VAT (20%):</span>
+                                    <span class="euro-amount" id="orderVAT">0.00</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3 fw-bold total-highlight">
+                                    <span>Total:</span>
+                                    <span class="euro-amount" id="orderTotal">0.00</span>
+                                </div>
+                                
+                                <!-- Promo Code -->
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Promo Code">
+                                    <button class="btn btn-outline-secondary" type="button">Apply</button>
+                                </div>
+                                
+                                <!-- Shipping Info -->
+                                <div class="alert alert-success">
+                                    <i class="fas fa-shipping-fast me-2"></i>
+                                    <strong>Free Shipping</strong> on orders over €50
+                                </div>
+                                
+                                <div class="alert alert-info">
+                                    <i class="fas fa-clock me-2"></i>
+                                    Estimated delivery: 3-5 business days
+                                </div>
+                                
+                                <!-- Quick Home Link -->
+                                <div class="text-center mt-4">
+                                    <a href="home.html" class="btn btn-outline-warning w-100">
+                                        <i class="fas fa-home me-2"></i>Return to Homepage
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Home Button -->
+    <a href="home.html" class="home-btn" title="Go to Home">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="border: 3px solid var(--pink-medium);">
+                <div class="modal-body text-center p-5">
+                    <div class="mb-4">
+                        <i class="fas fa-check-circle" style="color: var(--pink-medium); font-size: 4rem;"></i>
+                    </div>
+                    <h3 style="color: var(--text-dark);">Payment Successful!</h3>
+                    <p class="text-muted mb-4" id="successMessage">Thank you for your purchase. Your order has been confirmed.</p>
+                    <div class="d-grid gap-2">
+                        <a href="home.html" class="btn pink-btn">
+                            <i class="fas fa-home me-2"></i>Return to Home
+                        </a>
+                        <a href="products.html" class="btn btn-outline-primary">
+                            <i class="fas fa-store me-2"></i>Continue Shopping
+                        </a>
+                        <button class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- JavaScript -->
+    <script>
+        // Load cart from localStorage (MUST use same key as cart.html: 'blogCart')
+        let cart = JSON.parse(localStorage.getItem('blogCart')) || [];
+        
+        function loadOrderSummary() {
+            const container = document.getElementById('orderItems');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-3">
+                        <p class="text-muted">Your cart is empty</p>
+                        <a href="products.html" class="btn btn-sm pink-btn">Shop Now</a>
+                    </div>
+                `;
+                updateOrderTotals();
+                return;
+            }
+            
+            container.innerHTML = '';
+            let subtotal = 0;
+            
+            cart.forEach(item => {
+                const itemPrice = item.price || 0;
+                const itemQuantity = item.quantity || 1;
+                const itemTotal = itemPrice * itemQuantity;
+                subtotal += itemTotal;
+                
+                container.innerHTML += `
+                    <div class="order-item">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong>${item.name || 'Product'}</strong>
+                                <div class="small text-muted">Qty: ${itemQuantity} × €${itemPrice.toFixed(2)}</div>
+                            </div>
+                            <div class="euro-amount">${itemTotal.toFixed(2)}</div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            updateOrderTotals(subtotal);
+        }
+        
+        function updateOrderTotals(subtotal = 0) {
+            // Shipping: free over €50
+            const shipping = subtotal >= 50 ? 0 : 5.00;
+            
+            // Calculate VAT (20% for Europe)
+            const vatRate = 0.20; // 20% VAT
+            const vat = subtotal * vatRate;
+            
+            // Total including shipping and VAT
+            const total = subtotal + shipping + vat;
+            
+            // Update display
+            document.getElementById('orderSubtotal').textContent = subtotal.toFixed(2);
+            document.getElementById('orderVAT').textContent = vat.toFixed(2);
+            document.getElementById('orderTotal').textContent = total.toFixed(2);
+            
+            // Update shipping display
+            const shippingElement = document.getElementById('orderShipping');
+            if (shipping === 0) {
+                shippingElement.innerHTML = '<span class="text-success">0.00 <small>(Free!)</small></span>';
+            } else {
+                shippingElement.textContent = shipping.toFixed(2);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadOrderSummary();
+            
+            // Format card number input
+            const cardNumberInput = document.querySelector('input[placeholder="Card Number"]');
+            if (cardNumberInput) {
+                cardNumberInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                    let formatted = value.match(/.{1,4}/g);
+                    e.target.value = formatted ? formatted.join(' ') : value;
+                });
+            }
+            
+            // Format expiry date input
+            const expiryInput = document.querySelector('input[placeholder="MM/YY"]');
+            if (expiryInput) {
+                expiryInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/[^0-9]/g, '');
+                    if (value.length >= 2) {
+                        e.target.value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                    }
+                });
+            }
+            
+            // Payment form submission
+            const paymentForm = document.getElementById('paymentForm');
+            if (paymentForm) {
+                paymentForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Validate form
+                    const requiredFields = paymentForm.querySelectorAll('[required]');
+                    let isValid = true;
+                    
+                    requiredFields.forEach(field => {
+                        if (!field.value.trim()) {
+                            isValid = false;
+                            field.classList.add('is-invalid');
+                        } else {
+                            field.classList.remove('is-invalid');
+                        }
+                    });
+                    
+                    if (!isValid) {
+                        alert('Please fill in all required fields.');
+                        return;
+                    }
+                    
+                    // Check if cart is empty
+                    if (cart.length === 0) {
+                        alert('Your cart is empty. Please add items before checkout.');
+                        return;
+                    }
+                    
+                    // Calculate order total
+                    const subtotal = cart.reduce((sum, item) => {
+                        return sum + ((item.price || 0) * (item.quantity || 1));
+                    }, 0);
+                    
+                    const shipping = subtotal >= 50 ? 0 : 5.00;
+                    const vat = subtotal * 0.20;
+                    const total = subtotal + shipping + vat;
+                    
+                    // Update success message
+                    const successMessage = document.getElementById('successMessage');
+                    successMessage.innerHTML = `
+                        Thank you for your purchase!<br>
+                        <small class="text-muted">
+                            Order Total: €${total.toFixed(2)}<br>
+                            A confirmation email has been sent.
+                        </small>
+                    `;
+                    
+                    // Show success modal
+                    const modal = new bootstrap.Modal(document.getElementById('successModal'));
+                    modal.show();
+                    
+                    // Clear cart after successful payment
+                    setTimeout(() => {
+                        localStorage.removeItem('blogCart');
+                        cart = [];
+                        console.log('Cart cleared after payment');
+                    }, 100);
+                });
+            }
+            
+            // Add input validation styling
+            const inputs = document.querySelectorAll('.form-control[required]');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    if (!this.value.trim()) {
+                        this.classList.add('is-invalid');
+                    } else {
+                        this.classList.remove('is-invalid');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

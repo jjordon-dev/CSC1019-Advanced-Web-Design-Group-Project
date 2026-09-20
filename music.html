@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Music</title>
+
+
+<!-- Stylesheet -->
+<link rel="stylesheet" href="style.css"/>
+<script src="javascript.js" defer></script>
+
+
+<!-- MUSIC PLAYER - webamp rei --> <!-- https://isntreal.neocities.org/music/musicnew -->
+<script src="https://unpkg.com/webamp@1.4.0/built/webamp.bundle.min.js"></script>
+<div style="width:300px; height:200px; position:absolute; bottom:0px; left:0px;">
+<div id="winamp-container"></div>
+</div>
+<script>
+const Winamp = window.Webamp;
+
+const webamp = new Webamp({
+    initialTracks: [
+        {
+            metaData: { artist: "Bladee", title: "Linkdin" },
+            url: "https://files.catbox.moe/ifa4y9.mp3",
+        },
+        {
+            metaData: { artist: "Yung Lean", title: "Gatorade" },
+            url: "https://files.catbox.moe/ikyy0p.mp3",
+        },
+        {
+            metaData: { artist: "Thaiboy Digital", title: "Haters Broke" },
+            url: "https://files.catbox.moe/gymwyc.mp3",
+        },
+				{
+            metaData: { artist: "Ecco2k", title: "Play Em Like Atari" },
+            url: "https://files.catbox.moe/lb8pi7.mp3",
+        },
+    ],
+
+    initialSkin: {
+        url: "https://files.catbox.moe/uecxkx.wsz"
+    },
+});
+
+webamp.renderWhenReady(document.getElementById("winamp-container"));
+</script>
+</head>
+
+
+<!-- home page link -->
+<a href="home.html" id="home">Home</a>
+
+<body id="music_page">
+
+<div class="albums">
+
+  <div class="album_box">
+    <img src="assets/icedancer.png" class="album_cover" alt="icedancer">
+		<div class="album_title">Icedancer</div>
+    <p class="album_text">Icedancer is the 3rd mixtape by Swedish artist Bladee.<br>
+		Released in 2018, the project was produced by RipSquad and Lusi and it soon became a fan favourite.<br>
+		Titled by many as Bladee's "Magnum Opus", Icedancer features ethereal meoldies blended with Bladee's "cold" and "lonely" lyricism<br>
+		to help create a detatched coolness, just like a cold winter night.</br>
+		</div>
+
+  <div class="album_box">
+    <img src="assets/unknowndeath.png" class="album_cover" alt="unknown death">
+		<div class="album_title">Unknown Death</div>
+    <p class="album_text">Unknown Death was released in 2013 by Swedish rapper Yung Lean when he was only 16 years old.<br>
+		The album materialised Lean's style between 90s hip-hip and early 2000s internet culture.<br>
+		The experimental album features talents such producer Whitearmor and rapper Bladee.<br>
+		Soonthereafter, they went on to work closely within their founded GTBSBE group.</br></p>
+		</div>
+
+  <div class="album_box">
+    <img src="assets/tiger.png" class="album_cover" alt="tiger">
+		<div class="album_title">Tiger</div>
+    <p class="album_text">Tiger was Thai-Swedish rapper Thaiboy Digital's first album in 2014.<br>
+		After moving to Sweden at age 8, Thaiboy gained prominence in the Stockholm music scene after meeting<br>
+		GTBSE, and working alongside Whitearmor, Bladee, Yung Lean and others.<br>
+		Tiger helped define Thaiboy's role within the group with the release of a very energetic album.<br></p>
+		</div>
+	
+	<div class="album_box">
+    <img src="assets/E.png" class="album_cover" alt="E">
+		<div class="album_title">℮</div>
+    <p class="album_text">E is the debut stuido album by British-Swedish artist Ecco2k.
+		Ecco was the last member of GTBSE who had not yet published a solo album work. After its unexpected<br>
+		release in late 2019, it gained massive traction from fans due to its "dreamlike" melodies.<br>
+		With the help of production by Whitearmor and Gud, E was able to put Ecco in the spotlight for his own unique style.</br></p>
+		</div>
+
+</div>
+</html>

@@ -1,0 +1,563 @@
+/*  --------------------------------------------------------- 
+HOME html css styling	
+------------------------------------------ */
+
+body {
+  background-image: url("assets/background.png");
+}
+
+/* cursor */
+* { cursor: url(https://cur.cursors-4u.net/others/oth-4/oth305.cur), auto !important; }
+
+
+
+
+/* --------------------------
+   page styling
+   -------------------------- */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 25px;
+}
+
+.main-panel {
+  display: flex;
+  gap: 15px;
+  padding: 16px;
+  background: white;
+  border: 2px solid #ffb5d5;
+  border-radius: 12px;
+  box-shadow: 0 0 70px rgba(255, 0, 200, 0.3);
+}
+
+
+/* ----------------------------------
+   left side navigation bar
+--------------------------------------- */
+
+.sidebar {
+  width: 160px;
+  background: #fff0f9;
+  border-right: 2px dotted #ffb5d5;
+  padding: 8px;
+}
+
+/* sidebar's title */
+.sidebar h1 {
+  font-family: "Press Start 2P";
+  font-size: 14px;
+  color: #d63d9c;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* sidebar link boxes */
+.sidebar a {
+  display: block;
+  background: linear-gradient(#ffedf9, #ffdcee);
+  color: #c63d9c;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 4px 6px;
+  margin: 4px;
+  border: 1.1px solid #ffb5d5;
+  border-radius: 6px;
+  text-align: center;
+  transition: 0.35s;
+}
+
+.sidebar a:hover {
+  background: linear-gradient(#ffffff, #ffeaf9);
+  transform: translateX(3px);
+}
+
+/* ---------------------------------------------------------
+   music box miside
+--------------------------------------------------------- */
+
+.sidebar-music {
+  display: flex;
+  align-items: center;
+  width: 155px;
+  background: linear-gradient(#fff9fd, #ffeef8);
+  border: 1px solid #ffb5d5;
+  border-radius: 7px;
+  box-shadow: 0 0 5px rgba(255, 190, 200, 0.8);
+  padding: 2px 10px;
+  margin-top: 10px;
+  font-family: "Yomogi";
+  font-size: 11px;
+  color: #a13f70;
+  text-shadow: 0 0 2px rgba(255, 200, 220, 1);
+  height: 21px;
+}
+
+#miside {
+  flex: 1;
+}
+
+.equalisergif {
+  width: 50px;
+  height: 15px;
+  margin-top: 9px;
+  margin-right: 4px;
+}
+
+#music-btn {
+  background: none;
+  border: none;
+  color: #d63d9c;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 0 2px;
+  transition: transform 0.25s, color 0.2s;
+}
+
+#music-btn:hover {
+  color: #b03060;
+  transform: scale(1.1);
+}
+
+
+/* ---------------------------------------------------------
+   welcome box (main box)
+--------------------------------------------------------- */
+
+.welcome-box {
+  background: #fff8fa;
+  border: 2px dotted #ffb5d5;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.welcome-title {
+  text-align: center;
+  font-family: "Press Start 2P";
+  font-weight: bold;
+  font-size: 14px;
+  color: #d63d9c;
+  background: linear-gradient(#ffe9f4, #ffd6eb);
+  border: 1px solid #ffb5d5;
+  border-radius: 6px;
+  padding: 6px;
+  margin-bottom: 12px;
+  box-shadow: inset 0 1px 0 white;
+}
+
+.welcome-inner {
+  display: flex;
+  gap: 20px;
+}
+
+/* satomi */
+.welcome-inner img {
+  width: 250px;
+  border-radius: 8px;
+  border: 2px solid #ffb5d5;
+  box-shadow: 0 0 8px rgba(255, 160, 200, 3);
+}
+
+/* flower banner */
+.welcomeinner_left .banner-img {
+  width: 240px;
+  margin-left: 7px;
+  display: block;
+  border: none;
+  box-shadow: none;
+}
+
+.welcome-text {
+  max-width: 250px;
+  margin-top: 10px;
+  margin-right: 20px;
+  font-family: monospace;
+  font-size: 12px;
+  color: #d63d9c;
+  line-height: 1.7;
+  letter-spacing: 0.3px;
+  text-shadow: 0 0 4px rgba(255, 200, 230, 1);
+}
+
+
+/* jpkr */
+.vertical-text {
+    display: flex;
+    writing-mode: vertical-rl;
+    font-size: 16px;
+    letter-spacing: 9px;
+    margin-left: -20px;
+    margin-right: 12px;
+    transform: translateY(15px);
+}
+
+.vertical-text div {
+    margin: 0 3px;
+    text-shadow: 0 0 4px #ffd6f0, 0 0 6px #ffb5d5, 0 0 10px #ffb5d5;
+    transition: transform 0.2s, text-shadow 0.3s;
+}
+
+/* make pop whn hover */
+.vertical-text div:hover {
+    transform: scale(1.3);
+    text-shadow: 0 0 6px #ffc7ec, 0 0 10px #ff99cc, 0 0 14px #ff66b2;
+}
+
+.vertical-text .jp {
+    color: #d63d9c;
+    font-family: "Zen Maru Gothic";
+    margin-bottom: 10px;
+}
+
+.vertical-text .kr {
+    font-family: "Gowun Dodum";
+    color: #b16bdc;
+}
+
+
+
+/* =========================================================
+   Le time clock
+   ========================================================= */
+.clockbox {
+  background: white;
+  border: 2px solid #ffb5d5;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(255,160,200, 3);
+  width: 230px;
+  margin-top: 27px;
+  padding: 8px;
+  text-align: center;
+}
+
+.clock-title {
+  font-family: 'Style Script';
+  background: linear-gradient(#ffe9f4, #ffd6eb);
+  border: 1px solid #ffb5d5;
+  border-radius: 8px;
+  font-size: 17px;
+  color: #d63d9c;
+  padding: 3px;
+  margin-bottom: 8px;
+  box-shadow: inset 0 1px 0 white;
+}
+
+.clock-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.clockdance img {
+  width: 40px;
+}
+
+.clock-main {
+  background: white;
+  border: 2px solid #ffd7eb;
+  border-radius: 8px;
+  padding: 6px 12px;
+  box-shadow: inset 0 0 6px rgba(255,200,220, 0.7);
+  width: 110px;
+}
+
+#clocktime {
+  font-family: 'Yomogi';
+  font-size: 18px;
+  color: #d63d9c;
+  text-shadow: 0 0 4px rgba(255,190,220, 1);
+}
+
+#clockweekday {
+  font-size: 12px;
+  color: #b16bdc;
+  margin-top: 2px;
+  text-shadow: 2 2 8px rgba(255,200,220, 1);
+}
+
+
+/* chibitmita */
+.chibimitagod {
+	margin-top: 30px;
+	flex-direction: column;
+  width: 220px;
+  height: 421px;
+  border: 3px solid #ffb5d5;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255,160,200, 5);
+  display: flex;
+	overflow: hidden;
+}
+
+.chibimitatitle {
+  font-family: "Press Start 2P";
+  font-size: 14px;
+  color: #d63d9c;
+  background: linear-gradient(#ffe9f4, #ffd6eb);
+  border: 1px solid #ffb5d5;
+  padding: 6px;
+  width: 100%;
+  text-align: center;
+}
+
+.chibimitagod img {
+  width: 100%;
+  height: 100%;
+}
+
+/*-- bottom text diray entry */
+.diary {
+  background: #fff9fa;
+  border: 2px solid #ffb5d5;
+  border-radius: 8px;
+  padding: 12px;
+  width: 260px;
+  margin: 20px auto 0;
+	box-shadow:  0 0 12px rgba(255, 180, 213, 3);
+	transform: translateY(30px);
+}
+
+.diary_title {
+  text-align: center;
+  font-family: "Press Start 2P";
+  font-weight: bold;
+  font-size: 13px;
+  color: #d63d9c;
+  background: linear-gradient(#ffe9f4, #ffd6eb);
+  border: 1px solid #ffb5d5;
+  border-radius: 6px;
+  padding: 6px;
+  margin-bottom: 10px;
+  box-shadow: inset 0 1px 0 white;
+}
+
+.diary_text {
+  font-family: "Yomogi";
+  font-size: 12px;
+  color: #d63d9c;
+  line-height: 1.6;
+  text-align: center;
+  margin: 0;
+}
+
+
+
+/* =================================================================
+	=================================================================
+	=================================================================
+	=================================================================
+	=================================================================
+	=================================================================
+WEBPAGE 2 - SPACE CSS 		*/
+
+body {
+  font-family: 'Orbitron';
+}
+
+/* go to homepage */
+#home {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 5px 9px;
+  border-radius: 6px;
+  background: rgba(0,0,0,0.4);
+}							
+
+#home:hover {
+  background: rgba(255,255,255,0.6);
+  color: black;
+}
+
+#home:active {
+  transform: scale(0.90);
+}
+
+
+/* id space only */
+#space_page {
+  background: black;
+}
+
+/* override cursor */
+#space_page, #space_page * {
+  cursor: url("assets/Earth.cur"), auto !important;
+}
+
+
+/* main text */
+.welcome {
+  text-align: center;
+  color: white;
+  font-size: 28px;
+  padding-top: 10px;
+}
+
+
+/* Space background area */
+.space {
+  position: relative;
+  height: 50vh;
+}
+
+.planet {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.fact {
+  display: none;
+  position: absolute;
+  background: #000;
+  padding: 6px;
+  border: 1px solid white;
+  font-size: 15px;
+  margin-top: 10px;
+  width: 100px;
+  left: 50%;
+  color: white;
+}
+
+.planet:hover .fact {
+  display: block;
+}
+
+/* Space music */
+#spacemusic {
+  display: flex;
+  align-items: center;
+  margin: 14px auto 0;
+  width: 80px;
+  padding: 3px 5px;
+  border: 2px solid white;
+  border-radius: 5px;
+  color: white;
+  font-size: 12px;
+}
+
+#spacemusic_btn {
+  background: none;
+  border: none;
+  color: white;
+  width: 20px;
+  font-size: 15px;
+}
+
+
+/* bottom text */
+#ilovespace {
+  display: flex;
+  gap: 25px;
+  max-width: 1000px;
+  margin: 40px auto;
+  align-items: center;
+  position: relative;
+}
+
+#spacemita {
+  width: 300px;
+  border: 2px dotted white;
+  border-radius: 14px;
+  box-shadow: 0 0 12px rgba(255,255,255);
+}
+
+#ilovespacetext {
+  flex: 1;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  padding: 12px;
+  color: white;
+  font-size: 16px;
+  line-height: 1.6;
+  box-shadow: 0 0 12px rgba(255,255,255);
+}
+
+#chibisit {
+  width: 90px;
+  position: absolute;
+  top: -50px;
+  right: -10px;
+}
+
+
+
+
+
+/* ==============================================
+==============================================
+==============================================
+							Music 										*/
+							
+
+#music_page {
+  background-image: url("assets/awa.jpg");
+	background-size: cover;
+  background-attachment: fixed;
+}
+
+.albums {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.album_box {
+  width: 220px;
+  padding: 12px;
+  border-radius: 10px;
+	background: #1e1f20;
+  border: 2px solid #4a4d50;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 1);
+  text-align: center;
+}
+
+.album_title {
+  font-size: 18px;
+  font-family: "Courier New";
+  color: white;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px white;
+}
+
+.album_text { 
+	font-size: 14px; 
+	color: white; 
+	font-family: monospace; 	
+}
+
+.album_cover {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  border: 2px solid white;
+  box-shadow: 0 0 12px white;
+}
+
+/* top left home button */
+#home {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  color: white;
+  font-size: 16px;
+  text-decoration: none;
+  border: 2px solid white;
+  padding: 5px 9px;
+  border-radius: 6px;
+}							
+
+#home:hover {
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+}
+
+#home:active {
+  transform: scale(0.90);
+}
